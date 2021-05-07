@@ -23,17 +23,17 @@ services:
 
   package_app:
     build:
-      context: ./build
+      context: ./build_project
       dockerfile: Docker_build
     volumes:
-      - "build-path:/tmp/build/"
+      - "build-path:/usr/webapp/"
 
   production:
     build:
       context: ./prod
       dockerfile: Docker_prod
     volumes:
-      - "build-path:/tmp/build/"
+      - "build-path:/tmp/webapp/"
     depends_on:
       - package_app
       - database
