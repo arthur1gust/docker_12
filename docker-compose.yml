@@ -33,7 +33,7 @@ services:
       context: ./prod
       dockerfile: Docker_prod
     volumes:
-      - "build-path:/tmp/webapp/"
+      - "build-path:/usr/webapp/"
     depends_on:
       - package_app
       - database
