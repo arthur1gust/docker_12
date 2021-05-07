@@ -1,0 +1,6 @@
+FROM tomcat:9
+
+#RUN cd /tmp/app/target/
+#RUN cp /tmp/app/target/*.war /usr/local/tomcat/webapps/
+EXPOSE 8080
+CMD ["catalina.sh", "run"]

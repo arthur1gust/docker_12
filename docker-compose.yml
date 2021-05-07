@@ -1,0 +1,45 @@
+version: "3"
+services:
+  database:
+    container_name: database-mysql
+    image: mysql
+    volumes:
+      - "db-path:/var/lib/mysql/"
+    ports:
+      - "3306:3306"
+    expose:
+      - "3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 321
+      MYSQL_DATABASE: namebase
+      MYSQL_USER: user_mysql
+      MYSQL_PASSWORD: 321
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    ports:
+      - "8085:80"
+
+  package_app:
+    build:
+      context: ./build
+      dockerfile: Docker_build
+    volumes:
+      - "build-path:/tmp/build/"
+
+  production:
+    build:
+      context: ./prod
+      dockerfile: Docker_prod
+    volumes:
+      - "build-path:/tmp/build/"
+    depends_on:
+      - package_app
+      - database
+    ports:
+      - "8080:8080"
+
+volumes:
+  build-path:
+  db-path:
