@@ -15,18 +15,13 @@ services:
       MYSQL_USER: user_mysql
       MYSQL_PASSWORD: 321
 
-  phpmyadmin:
-    image: phpmyadmin
-    restart: always
-    ports:
-      - "8085:80"
-
   package_app:
     build:
       context: ./build_project
       dockerfile: Docker_build
     volumes:
-      - "build-path:/usr/webapp/"
+      - "build-path::/home/docker_12/target/"
+      - "property-path:/home/docker_12/WebContent/"
 
   production:
     build:
@@ -34,6 +29,7 @@ services:
       dockerfile: Docker_prod
     volumes:
       - "build-path:/usr/webapp/"
+      - "property-path:/home/docker_12/WebContent/"
     depends_on:
       - package_app
       - database
@@ -43,3 +39,4 @@ services:
 volumes:
   build-path:
   db-path:
+  property-path:

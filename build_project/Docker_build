@@ -9,9 +9,5 @@ RUN mkdir /home/docker_12/
 WORKDIR /home/docker_12/
 RUN git clone https://github.com/shephertz/App42PaaS-Java-MySQL-Sample.git .
 
-RUN mvn clean package
-
-RUN mkdir /usr/webapp/
-RUN cd /usr/webapp/
-RUN cp -r /home/docker_12/target/* /usr/webapp/
+RUN mvn package
 
