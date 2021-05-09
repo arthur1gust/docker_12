@@ -10,8 +10,8 @@ services:
     expose:
       - "3306"
     environment:
-      MYSQL_ROOT_PASSWORD: 321
-      MYSQL_DATABASE: namebase
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: dd
       MYSQL_USER: user_mysql
       MYSQL_PASSWORD: 321
 
@@ -20,7 +20,7 @@ services:
       context: ./build_project
       dockerfile: Docker_build
     volumes:
-      - "build-path::/home/docker_12/target/"
+      - "build-path:/home/docker_12/target/"
       - "property-path:/home/docker_12/WebContent/"
 
   production:
@@ -28,8 +28,8 @@ services:
       context: ./prod
       dockerfile: Docker_prod
     volumes:
-      - "build-path:/usr/webapp/"
-      - "property-path:/home/docker_12/WebContent/"
+      - "build-path:/usr/local/tomcat/webapps/"
+      - "property-path:/usr/local/tomcat/ROOT/"
     depends_on:
       - package_app
       - database
